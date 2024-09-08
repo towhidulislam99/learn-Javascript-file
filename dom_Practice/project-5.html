@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>To_Do List Make using Javascript</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    </head>
+    <body>
+
+        <div class="flex justify-center items-center  min-h-screen">
+            <div class="w-full max-w-lg">
+                <div class="items-center" >
+                    <h1 class="text-4xl mb-6 ">TO-DO List </h1>
+                </div>
+                <div>
+                    <input  id="taskInput" class="text-sm border border-gray-300 px-4 py-2 focus:border-black focus:border-[1px] focus:outline-none ml-4" type="text" placeholder="Add new Task...">
+                    <button onclick="addTask()" class="bg-pink-700 px-6 py-2 text-center text-white ml-4">Add</button>
+                    <button onclick="deleteTaskChecked()" class="bg-red-700 px-6 py-2 text-center text-white ml-2">Delete Checked</button>
+                </div>
+                <div>
+                    <ul class="list-disc mt-6 text-md" id="taskList"></ul>
+                </div>
+            </div>
+        </div>
+    
+        <script src="project-5.js"></script>
+    </body>
+</html>
