@@ -79,3 +79,55 @@ else{
     
 }
 
+
+
+// function showPrime(n){
+
+//     nextPrime: for (let i = 2; i < n; i++){
+//         for (let j = 2; j < i; j++){
+//             if(i % j == 0) continue nextPrime;
+//         }
+//         console.log(i);
+        
+//     }
+// }
+
+// showPrime(40);
+
+function showPrime(n){
+    for(let i = 2; i < n; i++){
+        if(!isPrime(i)) continue;
+
+        console.log(i);
+        
+    }
+}
+
+function isPrime(n){
+    for(let i =2; i < n; i++){
+        if(n % i == 0) return false;
+    }
+
+    return true;
+}
+
+showPrime(50);
+
+
+function grettingPeople(age) {
+    let message;
+
+    if (age > 18) {
+        message = "Are You Pass This Barrier";
+    } else {
+        message = "You are not Pass this Barrier";
+    }
+
+    welcome(message);
+}
+
+function welcome(message) {
+    console.log(message);
+}
+
+grettingPeople(20);
