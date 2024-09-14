@@ -55,7 +55,7 @@ products.forEach(product => {
                 <h1 class="text-md font-semibold mb-2">${title}</h1>
                 <p class="text-sm text-gray-400 mb-2">${description}</p>
                 <p class="font-semibold text-gray-500 text-center mb-4">Price: $${price}</p>
-                <button onclick="AddToCard(${id}, '${title}', ${price})" class="addToCart bg-gray-500 px-6 py-2 font-semibold text-white text-center items-center justify-center mx-auto rounded mb-3">Add to Cart</button>
+                <button onclick="AddToCard(${id}, '${title}', ${price})" class="addToCart bg-gray-500 px-6 py-2 font-semibold text-white text-center items-center justify-center mx-auto rounded mb-3 hover:bg-gray-300 hover:text-black transition">Add to Cart</button>
             </div>
         </div>
     `;
