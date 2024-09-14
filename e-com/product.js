@@ -100,7 +100,7 @@ function updateCartDisplay(){
     })
 
     itemCount.textContent = totalItems;
-    totalPrice.textContent = `Total: $${totalCost.toFixed(2)}`;
+    totalPrice.textContent = `${totalCost.toFixed(2)}`;
 }
 
 function increaseQuantity(index){
