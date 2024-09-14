@@ -13,55 +13,68 @@
         <div class="container mx-auto mt-20">
             <div class="flex flex-wrap mb-20">
                 <div id="productCard" class="productCard flex flex-row gap-10 justify-center items-center">
-                    <!-- <div id="" class="justify-center items-center px-6 py-3 border border-b-gray-300 shadow-md shadow-gray-300">
-                        <div id="productImg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSvId9ySl-OGP2RQpHH4OOeHelOMCqPP35Xw&s" alt="">
-                        </div>
-                        <div>
-                            <h1 id="productTittle">Product Tittle</h1>
-                            <p id="productDes">Produt Description</p>
-                            <p id="productPrice">Price : $ 220</p>
-                            <button id="addToCard" class="bg-gray-500 px-6 py-2 font-semibold text-white">Add to Cart</button>
-                        </div>
-                       
-                    </div> -->
-            
-
+                    
                 </div>
             </div>
 
 
             <section>
-                <div>
-                    <h1 class="p-5 bg-gray-300 font-bold text-xl uppercase">Add To Cart Panel</h1>
-
-                    <div class="ml-20 mb-20">                      
-                        <ul class="mt-10 " id="cartList">
-                           
+                <div class="w-11/12 mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+                    <h1 class="p-5 bg-gray-300 font-bold text-xl uppercase text-center">Add To Cart Panel</h1>
+                
+                    <div class="px-6 py-10">                      
+                        <ul class="mt-10 space-y-4" id="cartList">
+                            <!-- Cart items will be dynamically added here -->
                         </ul>
-
-                        <input type="text" id="promoCodeInput" placeholder="Enter Promo Code" class="border border-gray-300 px-4 py-2 rounded-md" />
-                        <button onclick="applyPromoCode()" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Apply</button>
-
-                        <p class="text-md font-semibold mt-6 ">Total Items: <span class="text-rose-800" id="itemCount">0</span></p>
-                        <p class="text-md font-semibold">Total Price: $<span class="text-red-700" id="totalPrice">0.00</span></p>
-
-                        <button id="confirmPurchase" class="bg-green-500 text-white px-4 py-2">Confirm Purchase</button>
-
+                        
+                        <div class="flex items-end justify-end">
+                            <button id="promoCode" class="mt-8 px-6 py-2 bg-indigo-700 font-semibold text-white rounded">Apply Promo Code</button>
+                        </div>
+                        
+                        <div id="promoApply" class="hidden flex items-center mt-6">
+                            <input type="text" id="promoCodeInput" placeholder="Enter Promo Code" class="border border-gray-300 px-4 py-2 rounded-md flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                            <button onclick="applyPromoCode()" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2 hover:bg-blue-600">Apply</button>
+                        </div>
+                
+                        <div class="mt-8">
+                            <p class="text-lg font-semibold">Total Items: <span class="text-rose-800" id="itemCount">0</span></p>
+                            <p class="text-lg font-semibold">Total Price: $<span class="text-red-700" id="totalPrice">0.00</span></p>
+                        </div>
+                
+                        <button id="confirmPurchase" class="w-full mt-6 bg-green-500 text-white px-6 py-3 font-bold text-lg rounded-md hover:bg-green-600 transition duration-300">Confirm Purchase</button>
                     </div>
-
                 </div>
+                
 
                 <div id="successMessage" class="hidden mt-5 p-3 bg-green-200 text-green-800">
                     <p>Success! Your order has been confirmed.</p>
                 </div>
 
-                <div id="invoiceSection" class="hidden mt-5 p-5 border border-gray-300">
-                    <h2 class="text-xl font-bold mb-4">Invoice</h2>
-                    <ul id="invoiceItemsList" class="mb-4"></ul> 
-                    <p>Total Quantity: <span id="invoiceTotalQuantity"></span></p>
-                    <p>Total Price: $<span id="invoiceTotalPrice"></span></p>
-                    <button id="printInvoice" class="mt-4 bg-blue-500 text-white px-4 py-2">Print Invoice</button>
+                <div id="invoiceSection" class="hidden mt-5 p-5 border border-gray-300 rounded-lg shadow-lg max-w-xl mx-auto bg-white">
+                    <!-- Invoice Header -->
+                    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Invoice</h2>
+                
+                    <!-- Invoice Items List -->
+                    <ul id="invoiceItemsList" class="mb-6 divide-y divide-gray-200">
+                        <!-- Dynamically generated list items will go here -->
+                    </ul> 
+                
+                    <!-- Total Quantity and Price -->
+                    <div class="flex justify-between items-center mb-4">
+                        <p class="text-lg font-semibold text-gray-700">Total Quantity:</p>
+                        <span id="invoiceTotalQuantity" class="text-lg font-bold text-gray-800"></span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p class="text-lg font-semibold text-gray-700">Total Price:</p>
+                        <span id="invoiceTotalPrice" class="text-lg font-bold text-green-600">$0.00</span>
+                    </div>
+                
+                    <!-- Print Button -->
+                    <div class="text-center mt-6">
+                        <button id="printInvoice" class="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
+                            Print Invoice
+                        </button>
+                    </div>
                 </div>
 
             </section>

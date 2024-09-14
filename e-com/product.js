@@ -51,11 +51,11 @@ products.forEach(product => {
             <div class="productImg">
                 <img src="${image}" alt="${title}">
             </div>
-            <div>
-                <h1 class="productTitle">${title}</h1>
-                <p class="productDes">${description}</p>
-                <p class="productPrice">Price: $${price}</p>
-                <button onclick="AddToCard(${id}, '${title}', ${price})" class="addToCart bg-gray-500 px-6 py-2 font-semibold text-white">Add to Cart</button>
+            <div class = "mx-auto text-center items-center justify-center">
+                <h1 class="text-md font-semibold mb-2">${title}</h1>
+                <p class="text-sm text-gray-400 mb-2">${description}</p>
+                <p class="font-semibold text-gray-500 text-center mb-4">Price: $${price}</p>
+                <button onclick="AddToCard(${id}, '${title}', ${price})" class="addToCart bg-gray-500 px-6 py-2 font-semibold text-white text-center items-center justify-center mx-auto rounded mb-3">Add to Cart</button>
             </div>
         </div>
     `;
@@ -76,6 +76,13 @@ function AddToCard(id, title, price){
     
     updateCartDisplay();
 }
+
+document.getElementById('promoCode').addEventListener('click', function() {
+    const promoApply = document.getElementById('promoApply');
+    promoApply.classList.remove('hidden')
+})
+
+
 
 let discount = 0; 
 const promoCodes = {
@@ -99,6 +106,7 @@ function applyPromoCode(){
 }
 
 document.getElementById('confirmPurchase').addEventListener('click', function() {
+    alert('are you sure? you want to Buy This Products!!')
     const successMessage = document.getElementById('successMessage');
     successMessage.classList.remove('hidden');
     
@@ -111,9 +119,10 @@ document.getElementById('confirmPurchase').addEventListener('click', function() 
     let totalQuantity = 0;
     let totalPrice = 0;
 
-    cart.forEach(product => {
+    cart.forEach((product, index) => {
         const invoiceItem = document.createElement('li');
-        invoiceItem.textContent = `${product.title} - ${product.price} x ${product.quantity}`;
+        const totalProductPrice = product.price * product.quantity;
+        invoiceItem.textContent = `${index + 1}.  ${product.title} - $${product.price} x ${product.quantity} = $${totalProductPrice.toFixed(2)}`;
         invoiceItemsList.appendChild(invoiceItem);
 
         totalQuantity += product.quantity;
@@ -137,32 +146,6 @@ function printInvoiceOnly() {
     document.body.innerHTML = originalContent;
 }
 
-
-// document.getElementById('confirmPurchase').addEventListener('click', function(){
-//     const successMessage = document.getElementById('successMessage');
-//     successMessage.classList.remove('hidden');
-
-//     if(cart.length > 0){
-//         const firstProduct = cart[0];
-//         const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
-
-//         const invoiceSection = document.getElementById('invoiceSection');
-//         invoiceSection.classList.remove('hidden');
-
-//         document.getElementById('productName').textContent = firstProduct.title;
-//         document.getElementById('invoiceQuantity').textContent = firstProduct.quantity;
-//         document.getElementById('invoicePrice').textContent = firstProduct.price;
-//         document.getElementById('invoiceTotalPrice').textContent = totalPrice.toFixed(2);
-
-//         document.getElementById('printInvoice').addEventListener('click',function(){
-//             window.print();
-//         })
-//     }else{
-//         alert('Your Cart is Empty!')
-//     }
-// });
-
-
 function updateCartDisplay(){
     const cartList = document.getElementById('cartList');
     const itemCount = document.getElementById('itemCount');
@@ -174,11 +157,42 @@ function updateCartDisplay(){
     let totalItems = 0;
 
     cart.forEach((product, index) => {
+
         const listItem = document.createElement('li');
-        listItem.style.marginTop = "20px";
-        listItem.textContent = `${product.title} - ${product.price} x ${product.quantity}`;
-        listItem.innerHTML += `<span class="ml-6 p-1 border border-blue-200 mr-1">${product.quantity}</span><button onclick="increaseQuantity(${index})" class="px-3 py-1 bg-gray-300 text-black mr-1"> + </button> <button onclick="decreaseQuantity(${index})" class="px-3 py-1 bg-gray-300 text-black mr-1"> - </button>`;
-        listItem.innerHTML += ` <button onclick="removeButton(${index})" class="addToCart bg-red-500 px-3 py-1 text-white">Remove Item</button>`;
+        listItem.classList.add('flex', 'items-center', 'justify-between', 'p-4', 'border', 'border-gray-200', 'rounded-lg', 'shadow-sm', 'mb-4', 'bg-white');
+        
+        const productInfo = document.createElement('div');
+        productInfo.classList.add('flex', 'flex-col', 'sm:flex-row', 'items-start', 'sm:items-center'); // Responsive for small devices
+        const totalProductPrice = product.price * product.quantity;
+        productInfo.innerHTML = `
+            <span class="font-semibold mr-2">${index + 1}.</span>
+            <span class="font-semibold">${product.title}</span>
+            <span class="ml-4 text-gray-500">Price: $${product.price}</span>
+            <span class="ml-4 text-gray-500">x ${product.quantity}</span>
+            <span class="ml-6 text-gray-500"> = $${totalProductPrice.toFixed(2)}</span>
+        `;
+        
+        const quantityControls = document.createElement('div');
+        quantityControls.classList.add('flex', 'items-center');
+        
+        quantityControls.innerHTML = `
+            <button onclick="decreaseQuantity(${index})" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">-</button>
+            <span class=" px-3 py-1 border border-blue-200 rounded">${product.quantity}</span>
+            <button onclick="increaseQuantity(${index})" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600">+</button>
+            
+        `;
+        
+
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('bg-red-500', 'text-white', 'px-4', 'py-2', 'rounded', 'hover:bg-red-600');
+        removeButton.textContent = 'Remove';
+        removeButton.setAttribute('onclick', `removeButton(${index})`);
+        
+        listItem.appendChild(productInfo);
+        listItem.appendChild(quantityControls);
+        listItem.appendChild(removeButton);
+        
+        // Append to cart list
         cartList.appendChild(listItem);
        
         totalItems += product.quantity;
