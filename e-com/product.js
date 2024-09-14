@@ -77,6 +77,92 @@ function AddToCard(id, title, price){
     updateCartDisplay();
 }
 
+let discount = 0; 
+const promoCodes = {
+    "PROMO10": 10,  
+    "PROMO20": 20,  
+};
+
+function applyPromoCode(){
+    const promoCodeInput = document.getElementById('promoCodeInput').value.trim().toUpperCase();
+    const discountPercentage = promoCodes[promoCodeInput];
+    
+    if(discountPercentage){
+        discount = discountPercentage;
+        alert(`Promo code applied! You got ${discount}% off.`);
+    }else{
+        discount = 0;
+        alert('Invalid Promo code!');
+    }
+
+    updateCartDisplay();
+}
+
+document.getElementById('confirmPurchase').addEventListener('click', function() {
+    const successMessage = document.getElementById('successMessage');
+    successMessage.classList.remove('hidden');
+    
+    const invoiceSection = document.getElementById('invoiceSection');
+    invoiceSection.classList.remove('hidden');
+    
+    const invoiceItemsList = document.getElementById('invoiceItemsList');
+    invoiceItemsList.innerHTML = '';
+    
+    let totalQuantity = 0;
+    let totalPrice = 0;
+
+    cart.forEach(product => {
+        const invoiceItem = document.createElement('li');
+        invoiceItem.textContent = `${product.title} - ${product.price} x ${product.quantity}`;
+        invoiceItemsList.appendChild(invoiceItem);
+
+        totalQuantity += product.quantity;
+        totalPrice += product.price * product.quantity;
+    });
+
+    document.getElementById('invoiceTotalQuantity').textContent = totalQuantity;
+    document.getElementById('invoiceTotalPrice').textContent = totalPrice.toFixed(2);
+
+    document.getElementById('printInvoice').addEventListener('click', function() {
+        printInvoiceOnly();
+    });
+});
+
+function printInvoiceOnly() {
+    const originalContent = document.body.innerHTML;
+    const invoiceContent = document.getElementById('invoiceSection').innerHTML;
+
+    document.body.innerHTML = invoiceContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+}
+
+
+// document.getElementById('confirmPurchase').addEventListener('click', function(){
+//     const successMessage = document.getElementById('successMessage');
+//     successMessage.classList.remove('hidden');
+
+//     if(cart.length > 0){
+//         const firstProduct = cart[0];
+//         const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+
+//         const invoiceSection = document.getElementById('invoiceSection');
+//         invoiceSection.classList.remove('hidden');
+
+//         document.getElementById('productName').textContent = firstProduct.title;
+//         document.getElementById('invoiceQuantity').textContent = firstProduct.quantity;
+//         document.getElementById('invoicePrice').textContent = firstProduct.price;
+//         document.getElementById('invoiceTotalPrice').textContent = totalPrice.toFixed(2);
+
+//         document.getElementById('printInvoice').addEventListener('click',function(){
+//             window.print();
+//         })
+//     }else{
+//         alert('Your Cart is Empty!')
+//     }
+// });
+
+
 function updateCartDisplay(){
     const cartList = document.getElementById('cartList');
     const itemCount = document.getElementById('itemCount');
@@ -98,6 +184,11 @@ function updateCartDisplay(){
         totalItems += product.quantity;
         totalCost += product.price * product.quantity;
     })
+
+    if(discount > 0){
+        const discountAmount = (totalCost * discount) / 100;
+        totalCost -= discountAmount;
+    }
 
     itemCount.textContent = totalItems;
     totalPrice.textContent = `${totalCost.toFixed(2)}`;

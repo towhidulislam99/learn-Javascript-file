@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+
     </head>
     <body>
 
@@ -39,11 +40,28 @@
                            
                         </ul>
 
+                        <input type="text" id="promoCodeInput" placeholder="Enter Promo Code" class="border border-gray-300 px-4 py-2 rounded-md" />
+                        <button onclick="applyPromoCode()" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Apply</button>
+
                         <p class="text-md font-semibold mt-6 ">Total Items: <span class="text-rose-800" id="itemCount">0</span></p>
                         <p class="text-md font-semibold">Total Price: $<span class="text-red-700" id="totalPrice">0.00</span></p>
-                    
+
+                        <button id="confirmPurchase" class="bg-green-500 text-white px-4 py-2">Confirm Purchase</button>
+
                     </div>
 
+                </div>
+
+                <div id="successMessage" class="hidden mt-5 p-3 bg-green-200 text-green-800">
+                    <p>Success! Your order has been confirmed.</p>
+                </div>
+
+                <div id="invoiceSection" class="hidden mt-5 p-5 border border-gray-300">
+                    <h2 class="text-xl font-bold mb-4">Invoice</h2>
+                    <ul id="invoiceItemsList" class="mb-4"></ul> 
+                    <p>Total Quantity: <span id="invoiceTotalQuantity"></span></p>
+                    <p>Total Price: $<span id="invoiceTotalPrice"></span></p>
+                    <button id="printInvoice" class="mt-4 bg-blue-500 text-white px-4 py-2">Print Invoice</button>
                 </div>
 
             </section>
