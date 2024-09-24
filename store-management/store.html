@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>E Com</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+
+    </head>
+    <body>
+        <section class="bg-slate-950 min-h-screen py-10">
+            <div class="container mx-auto px-4">
+                <!-- Title -->
+                <h1 class="text-white text-3xl font-bold mb-8 text-center">Store Management System</h1>
+                
+                <!-- Form Section -->
+                <div class="w-full md:w-8/12 lg:w-11/12 mx-auto p-6 bg-slate-800 rounded-lg shadow-md">
+                    <form id="productForm">
+                        <label class="block text-white font-semibold text-lg mb-2" for="name">Product Name:</label>
+                        <input class="block w-full p-2 mb-4 rounded border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               type="text" name="product_name" id="productName" placeholder="Enter Product Name...">
+                    
+                        <label class="block text-white font-semibold text-lg mb-2" for="price">Price:</label>
+                        <input class="block w-full p-2 mb-4 rounded border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               type="text" name="price" id="price" placeholder="Enter Price...">
+                    
+                        <label class="block text-white font-semibold text-lg mb-2" for="description">Product Description:</label>
+                        <input class="block w-full p-2 mb-4 rounded border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               type="text" name="description" id="description" placeholder="Enter Product Description...">
+                    
+                        <button type="submit" id="submit" class="w-full bg-blue-600 text-white font-semibold p-2 rounded hover:bg-blue-700 transition">Submit</button>
+                    </form>
+                </div>
+        
+                <!-- Table Section -->
+                <div class="flex justify-center mt-12 px-4">
+                    <div class="w-full max-w-6xl">
+                        <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
+                            <thead class="bg-blue-600">
+                                <tr class="text-white text-left">
+                                    <th class="p-4">Product Name</th>
+                                    <th class="p-4">Price</th>
+                                    <th class="p-4">Description</th>
+                                    <th class="p-4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productList">
+                                <!-- Example row for illustration -->
+                               
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+    
+        <script src="store.js"></script>
+    </body>
+</html>
